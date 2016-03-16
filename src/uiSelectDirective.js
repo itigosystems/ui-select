@@ -17,22 +17,11 @@ uis.directive('uiSelect',
     controllerAs: '$select',
     compile: function(tElement, tAttrs) {
 
-      // Allow setting ngClass on uiSelect
-      var match = /{(.*)}\s*{(.*)}/.exec(tAttrs.ngClass);
-      if(match) {
-        var combined = '{'+ match[1] +', '+ match[2] +'}';
-        tAttrs.ngClass = combined;
-        tElement.attr('ng-class', combined);
-      }
-
       //Multiple or Single depending if multiple attribute presence
       if (angular.isDefined(tAttrs.multiple))
-        tElement.append('<ui-select-multiple/>').removeAttr('multiple');
+        tElement.append("<ui-select-multiple/>").removeAttr('multiple');
       else
-        tElement.append('<ui-select-single/>');
-
-      if (tAttrs.inputId)
-        tElement.querySelectorAll('input.ui-select-search')[0].id = tAttrs.inputId;
+        tElement.append("<ui-select-single/>");       
 
       return function(scope, element, attrs, ctrls, transcludeFn) {
 
@@ -54,7 +43,7 @@ uis.directive('uiSelect',
 
         $select.onSelectCallback = $parse(attrs.onSelect);
         $select.onRemoveCallback = $parse(attrs.onRemove);
-
+        
         //Limit the number of selections allowed
         $select.limit = (angular.isDefined(attrs.limit)) ? parseInt(attrs.limit, 10) : undefined;
 
@@ -67,8 +56,8 @@ uis.directive('uiSelect',
 
         if(attrs.tabindex){
           attrs.$observe('tabindex', function(value) {
-            $select.focusInput.attr('tabindex', value);
-            element.removeAttr('tabindex');
+            $select.focusInput.attr("tabindex", value);
+            element.removeAttr("tabindex");
           });
         }
 
@@ -91,10 +80,6 @@ uis.directive('uiSelect',
           // $eval() is needed otherwise we get a string instead of a boolean
           var resetSearchInput = scope.$eval(attrs.resetSearchInput);
           $select.resetSearchInput = resetSearchInput !== undefined ? resetSearchInput : true;
-        });
-
-        attrs.$observe('paste', function() {
-          $select.paste = scope.$eval(attrs.paste);
         });
 
         attrs.$observe('tagging', function() {
@@ -163,7 +148,7 @@ uis.directive('uiSelect',
 
           if (!contains && !$select.clickTriggeredSelect) {
             //Will lose focus only with certain targets
-            var focusableControls = ['input','button','textarea','select'];
+            var focusableControls = ['input','button','textarea'];
             var targetController = angular.element(e.target).controller('uiSelect'); //To check if target is other ui-select
             var skipFocusser = targetController && targetController !== $select; //To check if target is other ui-select
             if (!skipFocusser) skipFocusser =  ~focusableControls.indexOf(e.target.tagName.toLowerCase()); //Check if target is input, button or textarea
@@ -265,9 +250,6 @@ uis.directive('uiSelect',
           element[0].style.left = '';
           element[0].style.top = '';
           element[0].style.width = originalWidth;
-
-          // Set focus back on to the moved element
-          $select.setFocus();
         }
 
         // Hold on to a reference to the .ui-select-dropdown element for direction support.

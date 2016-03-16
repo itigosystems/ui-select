@@ -257,3 +257,50 @@ body > .ui-select-bootstrap.open {
 .ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
 }
+
+.select2-container .select2-choice abbr {
+    display: none;
+    width: 12px;
+    height: 14px;
+    position: absolute;
+    right: 36px;
+    top: 5px !important;
+
+    font-size: 2px;
+    text-decoration: none;
+    background: url('select2.png') right top no-repeat;
+    border: 0;
+    cursor: pointer;
+    outline: 0;
+}
+.select2-container.select2-allowclear .select2-choice abbr {
+    display: inline-block;
+}
+
+.select2-container .select2-choice
+{
+    height: 28px;
+    line-height: 28px;
+    border-top-color: #a3a3a3;
+    border-left-color: #a3a3a3;
+    border-bottom-color: #ccc;
+    border-right-color: #ccc;
+    color: #000;
+}
+
+.select2-container-active .select2-choice, .select2-container-active .select2-choices
+{
+    border: 1px solid #5D98CC;
+}
+
+.select2-search .fa-spinner:before{
+    content: "\f110";
+}
+
+.ui-select-spinner {
+    position: relative;
+    z-index: 1;
+    left: -45px;
+    top: -1px;
+    width: 0;
+}
