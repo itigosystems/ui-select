@@ -1,3 +1,4 @@
+
 var KEY = {
     TAB: 9,
     ENTER: 13,
@@ -44,13 +45,6 @@ var KEY = {
     },
     isHorizontalMovement: function (k){
       return ~[KEY.LEFT,KEY.RIGHT,KEY.BACKSPACE,KEY.DELETE].indexOf(k);
-    },
-    toSeparator: function (k) {
-      var sep = {ENTER:"\n",TAB:"\t",SPACE:" "}[k];
-      if (sep) return sep;
-      // return undefined for special keys other than enter, tab or space.
-      // no way to use them to cut strings.
-      return KEY[k] ? undefined : k;
     }
   };
 
@@ -103,7 +97,8 @@ var uis = angular.module('ui.select', [])
   generateId: function() {
     return latestId++;
   },
-  appendToBody: false
+  appendToBody: false,
+  disableBackspaceReset: false
 })
 
 // See Rename minErr and make it accessible from outside https://github.com/angular/angular.js/issues/6913
@@ -135,11 +130,11 @@ var uis = angular.module('ui.select', [])
  */
 .filter('highlight', function() {
   function escapeRegexp(queryToEscape) {
-    return ('' + queryToEscape).replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
+    return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
   }
 
   return function(matchItem, query) {
-    return query && matchItem ? ('' + matchItem).replace(new RegExp(escapeRegexp(query), 'gi'), '<span class="ui-select-highlight">$&</span>') : matchItem;
+    return query && matchItem ? matchItem.replace(new RegExp(escapeRegexp(query), 'gi'), '<span class="ui-select-highlight">$&</span>') : matchItem;
   };
 })
 

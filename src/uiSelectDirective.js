@@ -66,6 +66,11 @@ uis.directive('uiSelect',
             $select.searchEnabled = searchEnabled !== undefined ? searchEnabled : uiSelectConfig.searchEnabled;
         });
 
+        scope.$watch('disableBackspaceReset', function() {
+            var disableBackspaceReset = scope.$eval(attrs.disableBackspaceReset);
+            $select.disableBackspaceReset = disableBackspaceReset !== undefined ? disableBackspaceReset : uiSelectConfig.disableBackspaceReset;
+            });
+
         scope.$watch('sortable', function() {
             var sortable = scope.$eval(attrs.sortable);
             $select.sortable = sortable !== undefined ? sortable : uiSelectConfig.sortable;
