@@ -14,9 +14,8 @@
        aria-label="{{ $select.baseTitle }}"
        aria-activedescendant="ui-select-choices-row-{{ $select.generatedId }}-{{ $select.activeIndex }}"
              class="ui-select-search select2-input"
-             ng-model="$select.search"
-             ng-readOnly="loading">
-        <span ng-if="loading" class="ui-select-spinner"><i class="fa fa-spinner fa-spin"></i></span>
+             ng-model="$select.search">
+        <span ng-if="loading" class="ui-select-smart-spinner"></span>
     </div>
     <div class="ui-select-choices"></div>
   </div>
